@@ -3,7 +3,7 @@
     <Project Path="src/Portfolio.Application/Portfolio.Application.csproj" />
     <Project Path="src/Portfolio.Domain/Portfolio.Domain.csproj" />
     <Project Path="src/Portfolio.Infrastructure/Portfolio.Infrastructure.csproj" />
-    <Project Path="src/PortfolioAPI/Portfolio.API.csproj" />
+    <Project Path="src/Portfolio.API/Portfolio.API.csproj" />
   </Folder>
   <Folder Name="/tests/" />
 </Solution>
