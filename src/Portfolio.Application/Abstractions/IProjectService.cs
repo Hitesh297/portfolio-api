@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Portfolio.Application.Abstractions
 {
-    public interface ISkillService
+    public interface IProjectService
     {
-        Task<IReadOnlyList<SkillDto>> GetAsync(CancellationToken ct);
+        Task<IReadOnlyList<ProjectDto>> GetAsync(CancellationToken ct);
     }
 }

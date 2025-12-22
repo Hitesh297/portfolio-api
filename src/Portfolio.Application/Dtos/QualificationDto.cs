@@ -4,12 +4,11 @@ using System.Text;
 
 namespace Portfolio.Application.Dtos
 {
-    public record SkillDto
+    public record QualificationDto
     {
         public long Id { get; init; }
-        public string Type { get; init; } = null!;
+        public string Credential { get; init; } = null!;
         public string Details { get; init; } = null!;
-        public int Sequence { get; init; }
-        public string FontawesomeHtml { get; init; } = null!;
+        public int YearCompleted { get; init; }
     }
 }

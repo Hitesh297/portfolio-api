@@ -7,36 +7,36 @@ namespace Portfolio.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SkillController : ControllerBase
+    public class ExperienceController : ControllerBase
     {
-        private readonly ISkillService _service;
-        public SkillController(ISkillService service) => _service = service;
+        // GET: api/<ExperienceController>
+        private readonly IExperienceService _service;
+        public ExperienceController(IExperienceService service) => _service = service;
 
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken ct)
             => Ok(await _service.GetAsync(ct));
 
-
-        // GET api/<PublicSkillsController>/5
+        // GET api/<ExperienceController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<PublicSkillsController>
+        // POST api/<ExperienceController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<PublicSkillsController>/5
+        // PUT api/<ExperienceController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<PublicSkillsController>/5
+        // DELETE api/<ExperienceController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

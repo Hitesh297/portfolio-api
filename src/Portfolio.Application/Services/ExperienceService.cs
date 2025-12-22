@@ -1,32 +1,30 @@
 ﻿using AutoMapper;
 using Portfolio.Application.Abstractions;
 using Portfolio.Application.Dtos;
-using Portfolio.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Portfolio.Application.Services
 {
-    public class SkillService : ISkillService
+    public class ExperienceService : IExperienceService
     {
-        private readonly ISkillRepository _repo;
+        private readonly IExperienceRepository _repo;
         private readonly IMapper _mapper;
 
-        public SkillService(ISkillRepository repo, IMapper mapper)
+        public ExperienceService(IExperienceRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
         }
 
-        public async Task<IReadOnlyList<SkillDto>> GetAsync(CancellationToken ct)
+        public async Task<IReadOnlyList<ExperienceDto>> GetAsync(CancellationToken ct)
         {
             var entities = await _repo.GetAllAsync(ct);
             var ordered = entities
-                .OrderBy(s => s.Sequence)
                 .ToList();
 
-            return _mapper.Map<IReadOnlyList<SkillDto>>(ordered);
+            return _mapper.Map<IReadOnlyList<ExperienceDto>>(ordered);
         }
     }
 }

@@ -7,36 +7,36 @@ namespace Portfolio.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SkillController : ControllerBase
+    public class ProjectController : ControllerBase
     {
-        private readonly ISkillService _service;
-        public SkillController(ISkillService service) => _service = service;
+        // GET: api/<ProjectController>
+        private readonly IProjectService _service;
+        public ProjectController(IProjectService service) => _service = service;
 
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken ct)
             => Ok(await _service.GetAsync(ct));
 
-
-        // GET api/<PublicSkillsController>/5
+        // GET api/<ProjectController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<PublicSkillsController>
+        // POST api/<ProjectController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<PublicSkillsController>/5
+        // PUT api/<ProjectController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<PublicSkillsController>/5
+        // DELETE api/<ProjectController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

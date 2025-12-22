@@ -17,7 +17,13 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(opt =>
         opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
+        services.AddScoped<IContactFormRepository, ContactFormRepository>();
+        services.AddScoped<IContentRepository, ContentRepository>();
+        services.AddScoped<IExperienceRepository, ExperienceRepository>();
+        services.AddScoped<IProjectRepository, ProjectRepository>();
+        services.AddScoped<IQualificationRepository, QualificationRepository>();
         services.AddScoped<ISkillRepository, SkillRepository>();
+        services.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
 
         return services;
     }

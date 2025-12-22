@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Portfolio.Application.Abstractions
 {
-    public interface ISkillService
+    public interface ISocialMediaService
     {
-        Task<IReadOnlyList<SkillDto>> GetAsync(CancellationToken ct);
+        Task<IReadOnlyList<SocialMediaDto>> GetAsync(CancellationToken ct);
     }
 }
