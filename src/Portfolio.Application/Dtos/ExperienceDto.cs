@@ -13,4 +13,13 @@ namespace Portfolio.Application.Dtos
         public DateOnly StartDate { get; init; }
         public DateOnly EndDate { get; init; }
     }
+
+    public record ExperienceCreateUpdateDto
+    {
+        public string CompanyName { get; init; } = null!;
+        public string Position { get; init; } = null!;
+        public string Responsibilities { get; init; } = null!;
+        public DateOnly StartDate { get; init; }
+        public DateOnly EndDate { get; init; }
+    }
 }

@@ -11,4 +11,11 @@ namespace Portfolio.Application.Dtos
         public string Details { get; init; } = null!;
         public int YearCompleted { get; init; }
     }
+
+    public record QualificationCreateUpdateDto
+    {
+        public string Credential { get; init; } = null!;
+        public string Details { get; init; } = null!;
+        public int YearCompleted { get; init; }
+    }
 }

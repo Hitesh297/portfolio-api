@@ -18,5 +18,26 @@ namespace Portfolio.Infrastructure.Repositories
             return _db.ContactForms.AsNoTracking().ToListAsync(ct);
         }
 
+        public async Task AddAsync(ContactForm entity, CancellationToken ct)
+        {
+            await _db.ContactForms.AddAsync(entity, ct);
+        }
+
+
+        public Task<ContactForm?> GetByIdAsync(long id, CancellationToken ct)
+        {
+            return _db.ContactForms.FirstOrDefaultAsync(x => x.Id == id, ct);
+        }
+
+        public void Remove(ContactForm entity)
+        {
+            _db.ContactForms.Remove(entity);
+        }
+
+        public Task<int> SaveChangesAsync(CancellationToken ct)
+        {
+            return _db.SaveChangesAsync(ct);
+        }
+
     }
 }

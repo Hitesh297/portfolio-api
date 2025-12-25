@@ -13,34 +13,34 @@ namespace Portfolio.Application.Mapping
         {
             // Skill
             CreateMap<Skill, SkillDto>();
-            //CreateMap<SkillCreateUpdateDto, Skill>();
+            CreateMap<SkillCreateUpdateDto, Skill>();
 
             // Project
             CreateMap<Project, ProjectDto>();
-            //CreateMap<ProjectCreateUpdateDto, Project>();
+            CreateMap<ProjectCreateUpdateDto, Project>();
 
             // Experience
             CreateMap<Experience, ExperienceDto>();
-            //CreateMap<ExperienceCreateUpdateDto, Experience>();
+            CreateMap<ExperienceCreateUpdateDto, Experience>();
 
             // Content (note ContentText <-> Content)
             CreateMap<Content, ContentDto>()
                 .ForMember(d => d.Content, opt => opt.MapFrom(s => s.ContentText));
 
-            //CreateMap<ContentCreateUpdateDto, Content>()
-                //.ForMember(d => d.ContentText, opt => opt.MapFrom(s => s.Content));
+            CreateMap<ContentCreateUpdateDto, Content>()
+                .ForMember(d => d.ContentText, opt => opt.MapFrom(s => s.Content));
 
             // SocialMedia
             CreateMap<SocialMedia, SocialMediaDto>();
-            //CreateMap<SocialMediaCreateUpdateDto, SocialMedia>();
+            CreateMap<SocialMediaCreateUpdateDto, SocialMedia>();
 
             // Qualification
             CreateMap<Qualification, QualificationDto>();
-            //CreateMap<QualificationCreateUpdateDto, Qualification>();
+            CreateMap<QualificationCreateUpdateDto, Qualification>();
 
             // ContactForm
             CreateMap<ContactForm, ContactFormDto>();
-            //CreateMap<ContactFormCreateDto, ContactForm>();
+            CreateMap<ContactFormCreateDto, ContactForm>();
 
         }
     }

@@ -15,4 +15,15 @@ namespace Portfolio.Application.Dtos
         public string? Photo { get; init; }
         public int Sequence { get; init; }
     }
+
+    public record ProjectCreateUpdateDto
+    {
+        public string Title { get; init; } = null!;
+        public string Description { get; init; } = null!;
+        public string Technologies { get; init; } = null!;
+        public string GitUrl { get; init; } = null!;
+        public string LiveUrl { get; init; } = null!;
+        public string? Photo { get; init; }
+        public int Sequence { get; init; }
+    }
 }

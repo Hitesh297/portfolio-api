@@ -11,4 +11,11 @@ namespace Portfolio.Application.Dtos
         public string Url { get; init; } = null!;
         public int Sequence { get; init; }
     }
+
+    public record SocialMediaCreateUpdateDto
+    {
+        public string Logo { get; init; } = null!;
+        public string Url { get; init; } = null!;
+        public int Sequence { get; init; }
+    }
 }

@@ -11,4 +11,12 @@ namespace Portfolio.Application.Dtos
         public string Email { get; init; } = null!;
         public string Message { get; init; } = null!;
     }
+
+    public record ContactFormCreateDto
+    {
+        public long Id { get; init; }
+        public string Name { get; init; } = null!;
+        public string Email { get; init; } = null!;
+        public string Message { get; init; } = null!;
+    }
 }

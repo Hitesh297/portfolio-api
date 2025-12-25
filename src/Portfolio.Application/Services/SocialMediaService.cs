@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Portfolio.Application.Abstractions;
 using Portfolio.Application.Dtos;
+using Portfolio.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,5 +28,43 @@ namespace Portfolio.Application.Services
 
             return _mapper.Map<IReadOnlyList<SocialMediaDto>>(ordered);
         }
+
+        public async Task<SocialMediaDto> CreateAsync(SocialMediaCreateUpdateDto dto, CancellationToken ct)
+        {
+            var entity = _mapper.Map<SocialMedia>(dto);
+
+            await _repo.AddAsync(entity, ct);
+            await _repo.SaveChangesAsync(ct);
+
+            return _mapper.Map<SocialMediaDto>(entity);
+        }
+
+        public async Task<bool> DeleteAsync(long id, CancellationToken ct)
+        {
+            var entity = await _repo.GetByIdAsync(id, ct);
+            if (entity is null) return false;
+
+            _repo.Remove(entity);
+            await _repo.SaveChangesAsync(ct);
+            return true;
+        }
+
+        public async Task<SocialMediaDto?> GetByIdAsync(long id, CancellationToken ct)
+        {
+            var entity = await _repo.GetByIdAsync(id, ct);
+            return entity is null ? null : _mapper.Map<SocialMediaDto>(entity);
+        }
+
+        public async Task<bool> UpdateAsync(long id, SocialMediaCreateUpdateDto dto, CancellationToken ct)
+        {
+            var entity = await _repo.GetByIdAsync(id, ct);
+            if (entity is null) return false;
+
+            _mapper.Map(dto, entity);
+
+            await _repo.SaveChangesAsync(ct);
+            return true;
+        }
+
     }
 }

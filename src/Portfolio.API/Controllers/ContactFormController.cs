@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Abstractions;
+using Portfolio.Application.Dtos;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,29 +18,25 @@ namespace Portfolio.API.Controllers
         public async Task<IActionResult> GetAll(CancellationToken ct)
             => Ok(await _service.GetAsync(ct));
 
-        // GET api/<ContactFormController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id:long}")]
+        public async Task<IActionResult> GetById(long id, CancellationToken ct)
         {
-            return "value";
+            var result = await _service.GetByIdAsync(id, ct);
+            return result is null ? NotFound() : Ok(result);
         }
 
-        // POST api/<ContactFormController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Create([FromBody] ContactFormCreateDto dto, CancellationToken ct)
         {
+            var created = await _service.CreateAsync(dto, ct);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-        // PUT api/<ContactFormController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpDelete("{id:long}")]
+        public async Task<IActionResult> Delete(long id, CancellationToken ct)
         {
-        }
-
-        // DELETE api/<ContactFormController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var ok = await _service.DeleteAsync(id, ct);
+            return ok ? NoContent() : NotFound();
         }
     }
 }

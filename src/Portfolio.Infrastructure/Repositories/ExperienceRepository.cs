@@ -17,5 +17,26 @@ namespace Portfolio.Infrastructure.Repositories
         {
             return _db.Experiences.AsNoTracking().ToListAsync(ct);
         }
+
+        public async Task AddAsync(Experience entity, CancellationToken ct)
+        {
+            await _db.Experiences.AddAsync(entity, ct);
+        }
+
+
+        public Task<Experience?> GetByIdAsync(long id, CancellationToken ct)
+        {
+            return _db.Experiences.FirstOrDefaultAsync(x => x.Id == id, ct);
+        }
+
+        public void Remove(Experience entity)
+        {
+            _db.Experiences.Remove(entity);
+        }
+
+        public Task<int> SaveChangesAsync(CancellationToken ct)
+        {
+            return _db.SaveChangesAsync(ct);
+        }
     }
 }

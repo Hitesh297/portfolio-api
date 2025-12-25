@@ -17,5 +17,26 @@ namespace Portfolio.Infrastructure.Repositories
         {
             return _db.Contents.AsNoTracking().ToListAsync(ct);
         }
+
+        public async Task AddAsync(Content entity, CancellationToken ct)
+        {
+            await _db.Contents.AddAsync(entity, ct);
+        }
+
+
+        public Task<Content?> GetByIdAsync(long id, CancellationToken ct)
+        {
+            return _db.Contents.FirstOrDefaultAsync(x => x.Id == id, ct);
+        }
+
+        public void Remove(Content entity)
+        {
+            _db.Contents.Remove(entity);
+        }
+
+        public Task<int> SaveChangesAsync(CancellationToken ct)
+        {
+            return _db.SaveChangesAsync(ct);
+        }
     }
 }

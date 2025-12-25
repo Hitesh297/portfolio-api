@@ -17,5 +17,26 @@ namespace Portfolio.Infrastructure.Repositories
         {
             return _db.Qualifications.AsNoTracking().ToListAsync(ct);
         }
+
+        public async Task AddAsync(Qualification entity, CancellationToken ct)
+        {
+            await _db.Qualifications.AddAsync(entity, ct);
+        }
+
+
+        public Task<Qualification?> GetByIdAsync(long id, CancellationToken ct)
+        {
+            return _db.Qualifications.FirstOrDefaultAsync(x => x.Id == id, ct);
+        }
+
+        public void Remove(Qualification entity)
+        {
+            _db.Qualifications.Remove(entity);
+        }
+
+        public Task<int> SaveChangesAsync(CancellationToken ct)
+        {
+            return _db.SaveChangesAsync(ct);
+        }
     }
 }

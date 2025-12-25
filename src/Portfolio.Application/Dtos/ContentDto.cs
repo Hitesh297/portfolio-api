@@ -10,4 +10,10 @@ namespace Portfolio.Application.Dtos
         public string Content { get; init; } = null!;
         public string Type { get; init; } = null!;
     }
+
+    public record ContentCreateUpdateDto
+    {
+        public string Content { get; init; } = null!;
+        public string Type { get; init; } = null!;
+    }
 }
