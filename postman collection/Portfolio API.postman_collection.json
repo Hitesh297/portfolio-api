@@ -1,0 +1,962 @@
+{
+	"info": {
+		"_postman_id": "2bf6ae21-fe6b-447c-83ff-71e1ac7c78cc",
+		"name": "Local Portfolio API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35944256"
+	},
+	"item": [
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "Get Skills",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/skill",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gt by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/skill/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Skill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks1\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 10,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/skill",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Skill",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks123\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 100,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/skill/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Skill",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/skill/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SocialMedia",
+			"item": [
+				{
+					"name": "Get Social Media",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/socialmedia",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"socialmedia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gt by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/socialmedia/5",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"socialmedia",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Social Media",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"logo\": \"<i class=\\\"fa-brands fa-500px social\\\"></i>\",\r\n        \"url\": \"https://500px.com/p/hites297\",\r\n        \"sequence\": 10\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/socialmedia",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"socialmedia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Social Media",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"logo\": \"<i class=\\\"fa-brands fa-500px social\\\"></i>\",\r\n    \"url\": \"https://500px.com/p/hites297\",\r\n    \"sequence\": 11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/socialmedia/5",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"socialmedia",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Social Media",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/socialmedia/5",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"socialmedia",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ContactForm",
+			"item": [
+				{
+					"name": "Get Contact Form",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/contactform",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"contactform"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gt by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/contactform/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"contactform",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contact Form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks1\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 10,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/contactform",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"contactform"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact Form",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks123\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 100,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/contactform/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"contactform",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contact Form",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/contactform/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"contactform",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content",
+			"item": [
+				{
+					"name": "Get Content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/content",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"content"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gt by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/content/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"content",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Content",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks1\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 10,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/content",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"content"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Content",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks123\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 100,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/content/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"content",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Content",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/content/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"content",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exprience",
+			"item": [
+				{
+					"name": "Get Experience",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/experience",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"experience"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gt by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/experience/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"experience",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Experience",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks1\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 10,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/experience",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"experience"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Experience",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks123\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 100,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/experience/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"experience",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Experience",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/experience/1",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"experience",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Get Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/project",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gt by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/project/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"project",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks1\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 10,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/project",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks123\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 100,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/project/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"project",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/project/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"project",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Qualification",
+			"item": [
+				{
+					"name": "Get Skills",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/skill",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gt by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/skill/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Skill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks1\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 10,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/skill",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Skill",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"type\": \"Frameworks123\",\r\n        \"details\": \"<p>.Net, .Net Core, React, Node, Laravel</p>\",\r\n        \"sequence\": 100,\r\n        \"fontawesomeHtml\": \"<i class=\\\"fa-solid fa-circle-nodes\\\"></i>\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/skill/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Skill",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/skill/7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"skill",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "socialmedia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/socialmedia",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"socialmedia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "azure-skills",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/skills",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"skills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contactform",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/contactform",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"contactform"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "content",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/content",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "experience",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/experience",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"experience"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/project",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "qualification",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/qualification",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"qualification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/health/ping",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"health",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": ""
+		},
+		{
+			"key": "azureurl",
+			"value": ""
+		},
+		{
+			"key": "localurl",
+			"value": ""
+		}
+	]
+}
