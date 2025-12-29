@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 using Portfolio.Application.Abstractions;
 using Portfolio.Application.Dtos;
 using Portfolio.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Portfolio.Application.Services
 {
@@ -12,21 +15,33 @@ namespace Portfolio.Application.Services
     {
         private readonly ISkillRepository _repo;
         private readonly IMapper _mapper;
-
-        public SkillService(ISkillRepository repo, IMapper mapper)
+        private readonly IMemoryCache _cache;
+        private const string PublicSkillsCacheKey = "public:skills:v1";
+        public SkillService(ISkillRepository repo, IMapper mapper, IMemoryCache cache)
         {
             _repo = repo;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<IReadOnlyList<SkillDto>> GetAsync(CancellationToken ct)
         {
-            var entities = await _repo.GetAllAsync(ct);
-            var ordered = entities
-                .OrderBy(s => s.Sequence)
-                .ToList();
+            if (_cache.TryGetValue(PublicSkillsCacheKey, out IReadOnlyList<SkillDto>? cached) && cached is not null)
+                return cached;
 
-            return _mapper.Map<IReadOnlyList<SkillDto>>(ordered);
+            var entities = await _repo.GetAllAsync(ct);
+            var dtos = entities
+            .OrderBy(s => s.Sequence)
+            .Select(s => _mapper.Map<SkillDto>(s))
+            .ToList()
+            .AsReadOnly();
+
+            _cache.Set(PublicSkillsCacheKey, dtos, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+            });
+
+            return dtos;
         }
 
         public async Task<SkillDto> CreateAsync(SkillCreateUpdateDto dto, CancellationToken ct)
@@ -35,6 +50,8 @@ namespace Portfolio.Application.Services
 
             await _repo.AddAsync(entity, ct);
             await _repo.SaveChangesAsync(ct);
+
+            InvalidatePublicSkillsCache(); // invalidate after write
 
             return _mapper.Map<SkillDto>(entity);
         }
@@ -46,6 +63,7 @@ namespace Portfolio.Application.Services
 
             _repo.Remove(entity);
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicSkillsCache(); // invalidate after delete
             return true;
         }
 
@@ -63,7 +81,13 @@ namespace Portfolio.Application.Services
             _mapper.Map(dto, entity);
 
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicSkillsCache(); // invalidate after update
             return true;
+        }
+
+        private void InvalidatePublicSkillsCache()
+        {
+            _cache.Remove(PublicSkillsCacheKey);
         }
     }
 }

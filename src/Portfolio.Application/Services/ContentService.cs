@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 using Portfolio.Application.Abstractions;
 using Portfolio.Application.Dtos;
 using Portfolio.Domain.Entities;
@@ -12,20 +13,33 @@ namespace Portfolio.Application.Services
     {
         private readonly IContentRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _cache;
+        private const string PublicContentsCacheKey = "public:Contents:v1";
 
-        public ContentService(IContentRepository repo, IMapper mapper)
+        public ContentService(IContentRepository repo, IMapper mapper, IMemoryCache cache)
         {
             _repo = repo;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<IReadOnlyList<ContentDto>> GetAsync(CancellationToken ct)
         {
-            var entities = await _repo.GetAllAsync(ct);
-            var ordered = entities
-                .ToList();
+            if (_cache.TryGetValue(PublicContentsCacheKey, out IReadOnlyList<ContentDto>? cached) && cached is not null)
+                return cached;
 
-            return _mapper.Map<IReadOnlyList<ContentDto>>(ordered);
+            var entities = await _repo.GetAllAsync(ct);
+            var dtos = entities
+                .Select(s => _mapper.Map<ContentDto>(s))
+                .ToList()
+                .AsReadOnly();
+
+            _cache.Set(PublicContentsCacheKey, dtos, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+            });
+
+            return dtos;
         }
 
         public async Task<ContentDto> CreateAsync(ContentCreateUpdateDto dto, CancellationToken ct)
@@ -34,6 +48,7 @@ namespace Portfolio.Application.Services
 
             await _repo.AddAsync(entity, ct);
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicContentsCache();
 
             return _mapper.Map<ContentDto>(entity);
         }
@@ -45,6 +60,7 @@ namespace Portfolio.Application.Services
 
             _repo.Remove(entity);
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicContentsCache();
             return true;
         }
 
@@ -62,7 +78,13 @@ namespace Portfolio.Application.Services
             _mapper.Map(dto, entity);
 
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicContentsCache();
             return true;
+        }
+
+        private void InvalidatePublicContentsCache()
+        {
+            _cache.Remove(PublicContentsCacheKey);
         }
     }
 }

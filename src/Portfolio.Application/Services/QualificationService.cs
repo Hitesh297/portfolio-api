@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 using Portfolio.Application.Abstractions;
 using Portfolio.Application.Dtos;
 using Portfolio.Domain.Entities;
@@ -12,20 +13,33 @@ namespace Portfolio.Application.Services
     {
         private readonly IQualificationRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _cache;
+        private const string PublicQualificationsCacheKey = "public:Qualifications:v1";
 
-        public QualificationService(IQualificationRepository repo, IMapper mapper)
+        public QualificationService(IQualificationRepository repo, IMapper mapper, IMemoryCache cache)
         {
             _repo = repo;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<IReadOnlyList<QualificationDto>> GetAsync(CancellationToken ct)
         {
-            var entities = await _repo.GetAllAsync(ct);
-            var ordered = entities
-                .ToList();
+            if (_cache.TryGetValue(PublicQualificationsCacheKey, out IReadOnlyList<QualificationDto>? cached) && cached is not null)
+                return cached;
 
-            return _mapper.Map<IReadOnlyList<QualificationDto>>(ordered);
+            var entities = await _repo.GetAllAsync(ct);
+            var dtos = entities
+                .Select(s => _mapper.Map<QualificationDto>(s))
+                .ToList()
+                .AsReadOnly();
+
+            _cache.Set(PublicQualificationsCacheKey, dtos, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+            });
+
+            return dtos;
         }
 
         public async Task<QualificationDto> CreateAsync(QualificationCreateUpdateDto dto, CancellationToken ct)
@@ -34,7 +48,7 @@ namespace Portfolio.Application.Services
 
             await _repo.AddAsync(entity, ct);
             await _repo.SaveChangesAsync(ct);
-
+            InvalidatePublicQualificationsCache();
             return _mapper.Map<QualificationDto>(entity);
         }
 
@@ -45,6 +59,7 @@ namespace Portfolio.Application.Services
 
             _repo.Remove(entity);
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicQualificationsCache();
             return true;
         }
 
@@ -62,7 +77,13 @@ namespace Portfolio.Application.Services
             _mapper.Map(dto, entity);
 
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicQualificationsCache();
             return true;
+        }
+
+        private void InvalidatePublicQualificationsCache()
+        {
+            _cache.Remove(PublicQualificationsCacheKey);
         }
     }
 }

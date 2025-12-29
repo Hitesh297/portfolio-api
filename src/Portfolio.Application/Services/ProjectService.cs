@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 using Portfolio.Application.Abstractions;
 using Portfolio.Application.Dtos;
 using Portfolio.Domain.Entities;
@@ -12,21 +13,34 @@ namespace Portfolio.Application.Services
     {
         private readonly IProjectRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _cache;
+        private const string PublicProjectsCacheKey = "public:Projects:v1";
 
-        public ProjectService(IProjectRepository repo, IMapper mapper)
+        public ProjectService(IProjectRepository repo, IMapper mapper, IMemoryCache cache)
         {
             _repo = repo;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<IReadOnlyList<ProjectDto>> GetAsync(CancellationToken ct)
         {
-            var entities = await _repo.GetAllAsync(ct);
-            var ordered = entities
-                .OrderBy(s => s.Sequence)
-                .ToList();
+            if (_cache.TryGetValue(PublicProjectsCacheKey, out IReadOnlyList<ProjectDto>? cached) && cached is not null)
+                return cached;
 
-            return _mapper.Map<IReadOnlyList<ProjectDto>>(ordered);
+            var entities = await _repo.GetAllAsync(ct);
+            var dtos = entities
+                .OrderBy(s => s.Sequence)
+                .Select(s => _mapper.Map<ProjectDto>(s))
+                .ToList()
+                .AsReadOnly();
+
+            _cache.Set(PublicProjectsCacheKey, dtos, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+            });
+
+            return dtos;
         }
 
         public async Task<ProjectDto> CreateAsync(ProjectCreateUpdateDto dto, CancellationToken ct)
@@ -35,7 +49,7 @@ namespace Portfolio.Application.Services
 
             await _repo.AddAsync(entity, ct);
             await _repo.SaveChangesAsync(ct);
-
+            InvalidatePublicProjectsCache();
             return _mapper.Map<ProjectDto>(entity);
         }
 
@@ -46,6 +60,7 @@ namespace Portfolio.Application.Services
 
             _repo.Remove(entity);
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicProjectsCache();
             return true;
         }
 
@@ -63,7 +78,13 @@ namespace Portfolio.Application.Services
             _mapper.Map(dto, entity);
 
             await _repo.SaveChangesAsync(ct);
+            InvalidatePublicProjectsCache();
             return true;
+        }
+
+        private void InvalidatePublicProjectsCache()
+        {
+            _cache.Remove(PublicProjectsCacheKey);
         }
     }
 }
