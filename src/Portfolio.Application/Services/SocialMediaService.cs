@@ -25,7 +25,7 @@ namespace Portfolio.Application.Services
 
         public async Task<IReadOnlyList<SocialMediaDto>> GetAsync(CancellationToken ct)
         {
-            if (_cache.TryGetValue(PublicSocialMediasCacheKey, out List<SocialMediaDto>? cached) && cached is not null)
+            if (_cache.TryGetValue(PublicSocialMediasCacheKey, out IReadOnlyList<SocialMediaDto>? cached) && cached is not null)
                 return cached;
 
             var entities = await _repo.GetAllAsync(ct);
