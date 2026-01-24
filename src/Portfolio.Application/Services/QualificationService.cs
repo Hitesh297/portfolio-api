@@ -36,7 +36,7 @@ namespace Portfolio.Application.Services
 
             _cache.Set(PublicQualificationsCacheKey, dtos, new MemoryCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(30)
             });
 
             return dtos;
