@@ -29,8 +29,13 @@ builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("client", p =>
-        p.WithOrigins(builder.Configuration["Client:Origin"] ?? "http://localhost:5174")
-         .AllowAnyHeader()
+        p.WithOrigins(
+            builder.Configuration
+                .GetSection("Client:Origins")
+                .Get<string[]>()
+            ?? ["http://localhost:5174"]
+        )
+          .AllowAnyHeader()
          .AllowAnyMethod());
 });
 
